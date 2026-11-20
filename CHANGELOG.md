@@ -2,6 +2,12 @@
 
 All notable user-facing changes to Turnleaf are listed here, newest first. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## Unreleased
+
+### Added
+
+- A command line, `turnleaf` (`npm run build:cli`, then `node dist/cli.js`), for scripts and AI agents: `sign-in`, `projects`, `link`, `pull`, `status` and `send`, which refuses file edits unless Track Changes is on (`--allow-untracked-edits` to lift it), and with `--comments-only` and `--allow-deletes` checks, JSON output and exit codes. It is not part of the extension package. See [Command line for scripts and agents](docs/guide/command-line.md).
+
 ## 0.10.2
 
 ### Added

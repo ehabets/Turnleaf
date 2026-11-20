@@ -10,6 +10,7 @@ New to Turnleaf? Start with [Getting started](getting-started.md), or open the *
 | [Syncing](syncing.md) | Get latest and the merge preview, the first sync, conflicts, the outgoing summary, Send, Fast and Full checks, Undo this send, Sync history, recovery, live updates, pictures and PDF figures |
 | [Comments and suggestions](comments.md) | The Review tab and its filters, gutter markers and highlights, replying, editing, resolving and deleting, suggestions, new comments, local addressed and declined status, the review log |
 | [Review files for AI agents and scripts](review-files-for-agents.md) | The JSON and Markdown files under `.turnleaf/`, queuing replies and resolutions, starting new comments from a file |
+| [Command line for scripts and agents](command-line.md) | `turnleaf` without an editor: sign in, link, pull, send, the checks a headless Send adds, exit codes |
 | [Annotated review PDF](annotated-pdf.md) | Putting the comments on your compiled PDF |
 | [Settings](settings.md) | Every `turnleaf.*` setting and color |
 | [Troubleshooting](troubleshooting.md) | Common messages, Send blocked, where data is kept, starting over, reporting a bug |

@@ -863,6 +863,7 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
+    "build:cli": "node scripts/build-cli.mjs",
     "check": "tsc --noEmit",
     "test:reference": "node scripts/fetch-reference.mjs",
     "pretest": "node scripts/fetch-reference.mjs",

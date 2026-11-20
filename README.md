@@ -23,6 +23,7 @@ Turnleaf is a VS Code and Cursor extension for authors who write LaTeX in a loca
 - **Pictures and PDF figures.** PNG, JPG and PDF files are compared by content and synchronized with the text.
 - **Review files for AI agents and scripts.** Comments are kept as JSON and Markdown files that agents can read, and where they can queue replies, resolutions and new comments for you to send.
 - **Annotated review PDF.** Put the comments as highlights and margin notes on your own compiled PDF.
+- **Command line for scripts and agents.** `turnleaf` runs Get latest, the review files and Send without an editor, for example for an automated reviewer that leaves comments on Overleaf.
 - **Self-hosted servers.** Point Turnleaf at your institution's Overleaf Server Pro.
 
 ## See it at work
@@ -65,6 +66,8 @@ Turnleaf is a VS Code and Cursor extension for authors who write LaTeX in a loca
 - It never stores your Overleaf session in your workspace, settings or logs. The session is kept in the editor's secret storage and, after browser sign-in, in a private browser profile until **Sign out** (see [SECURITY.md](SECURITY.md)).
 - It never contacts any server other than the configured Overleaf server, and it collects no telemetry.
 - It never publishes what AI agents or scripts queue in the review files until you press **Send**.
+
+The [command line](#command-line) is the exception to the first two points: a script decides when to send. It still writes nothing without `send --yes`, refuses file edits unless Track Changes is on for the account, needs `--allow-deletes` for any deletion, and keeps its session in `~/.config/turnleaf`, never in the project folder.
 
 ## Install
 
@@ -118,6 +121,22 @@ The commands below are in the Command Palette under **Turnleaf:**.
 | **Turnleaf: Open Sync History** | Open the timeline of sends and applies |
 | **Turnleaf: Export Annotated Review PDF** | Put the comments on your compiled PDF |
 
+## Command line
+
+For scripts and AI agents, `turnleaf` runs the same workflow without an editor. It is a separate build and not part of the extension package:
+
+```sh
+npm ci --ignore-scripts && npm run build:cli      # builds dist/cli.js
+node dist/cli.js sign-in                          # or save the session cookie by hand (below)
+node dist/cli.js link <project-id> --folder paper --all-sources
+node dist/cli.js pull --folder paper              # first run downloads the files
+# ... an agent queues comments in the review files ...
+node dist/cli.js send --folder paper --dry-run    # what would be written
+node dist/cli.js send --folder paper --yes        # write it
+```
+
+If `sign-in` cannot open a browser, for example because of an organization's browser policy, [save the session cookie by hand](docs/guide/command-line.md#save-the-session-by-hand). Every command can print JSON (`--json`) and returns exit codes a script can act on. See [Command line for scripts and agents](docs/guide/command-line.md).
+
 ## Documentation
 
 The [user guide](docs/guide/README.md) covers each task in detail:
@@ -127,6 +146,7 @@ The [user guide](docs/guide/README.md) covers each task in detail:
 - [Comments and suggestions](docs/guide/comments.md): the Review tab, gutter markers, threads, new comments, suggestions
 - [Review files for AI agents and scripts](docs/guide/review-files-for-agents.md)
 - [Annotated review PDF](docs/guide/annotated-pdf.md)
+- [Command line for scripts and agents](docs/guide/command-line.md)
 - [Settings](docs/guide/settings.md)
 - [Troubleshooting](docs/guide/troubleshooting.md)
 
